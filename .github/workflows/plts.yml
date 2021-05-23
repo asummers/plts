@@ -1,0 +1,44 @@
+name: Build PLTs
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  plt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo ::set-output name=elixirversion::$(cat elixir.txt)
+          echo ::set-output name=erlangversion::$(cat erlang.txt)
+        id: versions
+      - name: set up elixir
+        uses: actions/setup-elixir@v1
+        with:
+          experimental-otp: true
+          elixir-version: ${{ steps.versions.outputs.elixirversion }}
+          otp-version: ${{ steps.versions.outputs.erlangversion }}
+      - name: install dependencies
+        run: mix deps.get
+      - name: Upload PLTs
+        run: .github/scripts/plts.sh
+        env:
+          GITHUB_EMAIL: ${{ secrets.EMAIL }}
+          GITHUB_NAME: ${{ secrets.NAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          fail_on_unmatched_files: true
+          prerelease: false
+          name: ${{ steps.versions.outputs.elixirversion }}-${{ steps.versions.outputs.erlangversion }}
+          files: |
+            *.plt
+            *.plt.hash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
