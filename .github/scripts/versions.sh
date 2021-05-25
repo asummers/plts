@@ -13,7 +13,8 @@ elixir_versions () {
         sed 's/-.*//' | \
         uniq | \
         sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | \
-        sed -n '/^1.9.0$/,$p' > $destination
+        sed -n '/^1.9.0$/,$p' | \
+        sort -r > $destination
 
     cd ..
     rm -rf elixir
@@ -28,7 +29,8 @@ erlang_versions () {
         sed 's/^OTP-//' | \
         sed 's/-.*//' | \
         uniq | \
-        sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n > $destination
+        sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | \
+        sort -r > $destination
 
     cd ..
     rm -rf otp
@@ -58,7 +60,11 @@ do
   minor_version=$(echo "$elixirversion" | cut -d'.' -f2)
   min_erlang_version=$(cat ./versions/$major_version.$minor_version)
 
+  echo "Full size: $(touch filtered_erlang.txt && wc -l filtered_erlang.txt)"
+  echo "Size: $(touch filtered_erlang.txt && wc -l filtered_erlang.txt)"
+  echo "Min version for #elixirversion: $min_erlang_version"
   cat ../erlang.txt | sed -n '/^'"$min_erlang_version"'$/,$p' > filtered_erlang.txt
+  echo "Size: $(touch filtered_erlang.txt && wc -l filtered_erlang.txt)"
 
   while read -r erlangversion
   do
