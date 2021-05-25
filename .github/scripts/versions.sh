@@ -13,7 +13,8 @@ elixir_versions () {
         sed 's/-.*//' | \
         uniq | \
         sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | \
-        sed -n '/^1.9.0$/,$p' > $destination
+        sed -n '/^1.9.0$/,$p' | \
+        sort -r > $destination
 
     cd ..
     rm -rf elixir
@@ -28,7 +29,8 @@ erlang_versions () {
         sed 's/^OTP-//' | \
         sed 's/-.*//' | \
         uniq | \
-        sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n > $destination
+        sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | \
+        sort -r > $destination
 
     cd ..
     rm -rf otp
