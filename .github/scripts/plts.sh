@@ -15,7 +15,6 @@ rm -rf deps
 
 git rm -r ./*
 git rm -r .github
-git rm -r .gitignore
 
 cp ../generated_plts/* .
 git add *.plt
