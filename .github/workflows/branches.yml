@@ -17,7 +17,6 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
           persist-credentials: false
-          fetch-depth: 0
       - id: set-matrix
         run: .github/scripts/versions.sh
         env:
