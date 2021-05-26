@@ -44,13 +44,12 @@ echo "Read erlang versions"
 
 git config --global user.email "$GITHUB_EMAIL"
 git config --global user.name "$GITHUB_NAME"
+git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
 
 repo="https://github.com/$GITHUB_REPOSITORY.git"
 
 max_iterations=6
 counter=0
-
-git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
 
 while read -r elixirversion
 do
@@ -63,13 +62,13 @@ do
   while read -r erlangversion
   do
     version=$elixirversion-$erlangversion
-    echo "Checking if branch exists for $version"
+    echo "Checking if tag exists for $version"
 
-    exists=$(git ls-remote --heads $repo $version | wc -l)
+    exists=$(git ls-remote --tags $repo $version | wc -l)
 
     if [[ "$exists" -eq "0" ]]
     then
-      echo "Branch does not exist."
+      echo "Tag does not exist."
 
       git checkout -b $version
 
@@ -86,7 +85,7 @@ do
 
       counter=$(($counter + 1))
     else
-      echo "Branch exists. Skipping."
+      echo "Tag exists. Skipping."
     fi
 
     if [[ $counter -ge $max_iterations ]]
