@@ -13,7 +13,7 @@ elixir_versions () {
         sed 's/-.*//' | \
         uniq | \
         sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | \
-        sed -n '/^1.9.3$/,$p' > $destination
+        sed -n '/^1.9.4$/,$p' > $destination
 
     cd ..
     rm -rf elixir
