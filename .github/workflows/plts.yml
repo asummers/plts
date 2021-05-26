@@ -43,7 +43,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Delete branch
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{github.token}}
-          branches: ${{ steps.versions.outputs.elixirversion }}-${{ steps.versions.outputs.erlangversion }}
+        run: |
+          VERSION=${{ steps.versions.outputs.elixirversion }}-${{ steps.versions.outputs.erlangversion }}
+          git push origin --delete refs/heads/$VERSION
