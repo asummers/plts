@@ -58,11 +58,7 @@ do
   minor_version=$(echo "$elixirversion" | cut -d'.' -f2)
   min_erlang_version=$(cat ./versions/$major_version.$minor_version)
 
-  echo "Full size: $(touch filtered_erlang.txt && wc -l erlang.txt)"
-  echo "Filtered zize: $(touch filtered_erlang.txt && wc -l filtered_erlang.txt)"
-  echo "Min version for #elixirversion: $min_erlang_version"
   cat ../erlang.txt | sed -n '/^'"$min_erlang_version"'$/,$p' > filtered_erlang.txt
-  echo "Size: $(touch filtered_erlang.txt && wc -l filtered_erlang.txt)"
 
   while read -r erlangversion
   do

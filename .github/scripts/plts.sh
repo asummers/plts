@@ -10,8 +10,6 @@ mkdir ../generated_plts
 cp ./_build/dev/*.plt ../generated_plts
 cp ./_build/dev/*.plt.hash ../generated_plts
 
-ls ../generated_plts
-
 rm -rf _build
 rm -rf deps
 
