@@ -45,4 +45,4 @@ jobs:
       - name: Delete branch
         run: |
           VERSION=${{ steps.versions.outputs.elixirversion }}-${{ steps.versions.outputs.erlangversion }}
-          git push origin --delete :refs/tags/$VERSION
+          git push origin --delete refs/tags/$VERSION
