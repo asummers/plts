@@ -64,9 +64,10 @@ do
     version=$elixirversion-$erlangversion
     echo "Checking if tag exists for $version"
 
-    exists=$(git ls-remote --tags $repo $version | wc -l)
+    tag_exists=$(git ls-remote --tags $repo $version | wc -l)
+    branch_exists=$(git ls-remote --heads $repo $version | wc -l)
 
-    if [[ "$exists" -eq "0" ]]
+    if [[ "$tag_exists" -eq "0" ]] && [[ "$branch_exists" -eq "0" ]]
     then
       echo "Tag does not exist."
 
