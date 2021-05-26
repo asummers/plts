@@ -14,7 +14,6 @@ rm -rf _build
 rm -rf deps
 
 git rm -r ./*
-git rm -r .formatter.exs
 git rm -r .github
 git rm -r .gitignore
 
