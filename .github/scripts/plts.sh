@@ -3,7 +3,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-mix dialyzer
+mix dialyzer --plt
 
 mkdir ../generated_plts
 
