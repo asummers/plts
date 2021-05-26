@@ -22,7 +22,10 @@ jobs:
           elixir-version: ${{ steps.versions.outputs.elixirversion }}
           otp-version: ${{ steps.versions.outputs.erlangversion }}
       - name: install dependencies
-        run: mix deps.get
+        run: |
+          mix deps.get || \
+          mix deps.get || \
+          mix deps.get
       - name: Upload PLTs
         run: .github/scripts/plts.sh
         env:
