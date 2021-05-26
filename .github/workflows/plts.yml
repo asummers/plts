@@ -42,3 +42,5 @@ jobs:
             *.plt.hash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete branch
+        run: git push origin --delete ${{ steps.versions.outputs.elixirversion }}-${{ steps.versions.outputs.erlangversion }}
