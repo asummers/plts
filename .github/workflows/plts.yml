@@ -17,9 +17,8 @@ jobs:
           echo ::set-output name=erlangversion::$(cat erlang.txt)
         id: versions
       - name: set up elixir
-        uses: actions/setup-elixir@v1
+        uses: erlef/setup-beam@v1
         with:
-          experimental-otp: true
           elixir-version: ${{ steps.versions.outputs.elixirversion }}
           otp-version: ${{ steps.versions.outputs.erlangversion }}
       - name: install dependencies
