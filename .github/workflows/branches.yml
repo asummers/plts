@@ -17,8 +17,7 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
           persist-credentials: false
-      - id: set-matrix
-        run: .github/scripts/versions.sh
+      - run: .github/scripts/versions.sh
         env:
           GITHUB_EMAIL: ${{ secrets.EMAIL }}
           GITHUB_NAME: ${{ secrets.NAME }}
