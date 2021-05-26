@@ -48,7 +48,7 @@ git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHU
 
 repo="https://github.com/$GITHUB_REPOSITORY.git"
 
-max_iterations=6
+max_iterations=20
 counter=0
 
 while read -r elixirversion
